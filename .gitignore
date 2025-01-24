@@ -1,0 +1,8 @@
+# ignore .env files
+.env
+.env.example
+.env.local
+.env.staging
+
+# ignore the Keys folder
+Keys/
