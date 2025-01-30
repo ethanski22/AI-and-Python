@@ -20,7 +20,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model =  "gpt-3.5-turbo-instruct",
+    model =  "gpt-3.5-turbo",
     messages = [
         {
             "role": "system",
@@ -38,6 +38,7 @@ question = input("Ask me a question: ")
 response = client.Completions.create(
     engine = "gpt-4",
     prompt = f"Question: {question}\nAnswer: ",
+    store_log = True,
     max_tokens = 1024,
     stop = None,
     temperature = 0.7,
