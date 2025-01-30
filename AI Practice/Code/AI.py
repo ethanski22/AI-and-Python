@@ -15,12 +15,23 @@ load_dotenv(dotenv_path=env_path)
 # Set your API key
 #openai.api_key = os.getenv("OPENAI_API_KEY")
 
+# client = OpenAI(
+#     api_key = os.environ.get("OPENAI_API_KEY"),
+# )
+
+
+# Key for asure
+
 client = OpenAI(
-    api_key = os.environ.get("OPENAI_API_KEY"),
+    base_url = "https://models.inference.ai.azure.com",
+    api_key = os.environ.get("GITHUB_TOKEN"),
 )
 
+
+question = input("Ask me a question: ")
+
 response = client.chat.completions.create(
-    model =  "gpt-3.5-turbo",
+    model =  "gpt-4o",
     messages = [
         {
             "role": "system",
@@ -28,22 +39,24 @@ response = client.chat.completions.create(
         },
         {
             "role": "user",
-            "content": "How do I count cards in blackjack"
+            "content": f"{question}"
         }
-    ]
+    ],
+    temperature = 1,
+    max_tokens = 4096,
+    top_p = 1,
 )
 
-question = input("Ask me a question: ")
+# response = client.Completions.create(
+#     engine = "gpt-4",
+#     prompt = f"Question: {question}\nAnswer: ",
+#     store_log = True,
+#     max_tokens = 1024,
+#     stop = None,
+#     temperature = 0.7,
+# )
 
-response = client.Completions.create(
-    engine = "gpt-4",
-    prompt = f"Question: {question}\nAnswer: ",
-    store_log = True,
-    max_tokens = 1024,
-    stop = None,
-    temperature = 0.7,
-)
-answer = response.choices[0].text.strip()
-print(answer)
+# answer = response.choices[0].text.strip()
+# print(answer)
 
 print(response.choices[0].message.content)
