@@ -45,7 +45,7 @@ response = client.chat.completions.create(
     temperature = 1,
     max_tokens = 4096,
     top_p = 1,
-)
+) 
 
 # response = client.Completions.create(
 #     engine = "gpt-4",
