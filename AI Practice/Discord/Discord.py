@@ -23,7 +23,7 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     print(f"{member} has joined the server")
-\
+
 # Use to send a message to a specific channel
 # @client.event
 # async def on_member_join(member):
