@@ -47,6 +47,25 @@ response = client.chat.completions.create(
     top_p = 1,
 ) 
 
+def askGPT(question):
+    response = client.chat.completions.create(
+        model =  "gpt-4o",
+        messages = [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant."
+            },
+            {
+                "role": "user",
+                "content": f"{question}"
+            }
+        ],
+        temperature = 1,
+        max_tokens = 4096,
+        top_p = 1,
+    ) 
+    return response.choices[0].message.content
+
 # response = client.Completions.create(
 #     engine = "gpt-4",
 #     prompt = f"Question: {question}\nAnswer: ",
