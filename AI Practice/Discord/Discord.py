@@ -4,6 +4,7 @@ import requests
 from dotenv import load_dotenv
 from discord.ext import commands
 from pathlib import Path
+from AI import askGPT
 
 env_path = Path("AI Practice\Keys\.env")
 
@@ -23,6 +24,12 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     print(f"{member} has joined the server")
+
+@client.command()
+async def askChatGPT(ctx, *, arg):
+    response = askGPT(arg)
+    await ctx.send(response)
+
 
 # Use to send a message to a specific channel
 # @client.event
