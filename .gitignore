@@ -6,3 +6,4 @@
 
 # ignore the Keys folder
 Keys/
+__pycache__/

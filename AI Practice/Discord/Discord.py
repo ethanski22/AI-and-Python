@@ -1,10 +1,12 @@
 import os
+import sys
 import discord
 import requests
 from dotenv import load_dotenv
 from discord.ext import commands
 from pathlib import Path
-from AI import askGPT
+sys.path.insert(0, "AI Practice\Code")
+from AskAQuestion import askGPT
 
 env_path = Path("AI Practice\Keys\.env")
 
