@@ -10,18 +10,7 @@ env_path = Path("AI Practice\Keys\.env")
 # Load the .env file
 load_dotenv(dotenv_path=env_path)
 
-#OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-# Set your API key
-#openai.api_key = os.getenv("OPENAI_API_KEY")
-
-# client = OpenAI(
-#     api_key = os.environ.get("OPENAI_API_KEY"),
-# )
-
-
 # Key for asure
-
 client = OpenAI(
     base_url = "https://models.inference.ai.azure.com",
     api_key = os.environ.get("GITHUB_TOKEN"),
