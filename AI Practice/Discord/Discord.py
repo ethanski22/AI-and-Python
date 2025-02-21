@@ -2,11 +2,13 @@ import os
 import sys
 import discord
 import requests
+from gtts import gTTS
 from dotenv import load_dotenv
 from discord.ext import commands
 from pathlib import Path
 sys.path.insert(0, "AI Practice\Code")
 from AskAQuestion import askGPT
+from TextToSpeech import textToVoice
 
 env_path = Path("AI Practice\Keys\.env")
 
@@ -32,6 +34,17 @@ async def askChatGPT(ctx, *, arg):
     response = askGPT(arg)
     await ctx.send(response)
 
+@client.event
+async def askChatGPTVoice(ctx, *, arg):
+    # Generate TTS audio
+    tts = gTTS(text=arg, lang="en")
+    audio_file = "voice_message.ogg"
+    tts.save(audio_file)
+
+    response = textToVoice(arg, audio_file, ctx)
+    await ctx.send(response)
+
+    os.remove(audio_file)
 
 # Use to send a message to a specific channel
 # @client.event

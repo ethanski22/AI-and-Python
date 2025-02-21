@@ -2,6 +2,11 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from pathlib import Path
+from gtts import gTTS
+import requests
+import json
+import base64
+
 
 # Specify the path to the .env file
 env_path = Path("AI Practice\Keys\.env")
@@ -30,3 +35,24 @@ audioPath = Path("AI Practice\AudioFiles\output.ogg")
 with open(audioPath, "wb") as file:
     for chunk in response.iter_bytes():
         file.write(chunk)
+
+def textToVoice(text, audioFile, ctx):
+    response = client.audio.speech.create(
+        model = "tts-1",
+        voice = "echo",
+        response_format = "ogg",
+        input = text,
+    )
+
+    audioPath = Path("AI Practice\AudioFiles\output.ogg")
+
+    # Open file and write the response
+    with open(audioPath, "wb") as file:
+        for chunk in response.iter_bytes():
+            file.write(chunk)
+
+    fileSize = os.path.getsize(audioFile)
+
+    channelId = ctx.channel.id
+
+    return file
