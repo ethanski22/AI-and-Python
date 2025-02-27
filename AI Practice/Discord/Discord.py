@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, "AI Practice\Code")
 from AskAQuestion import askGPT
 from TextToSpeech import textToVoice
+from another import TTS
 
 env_path = Path("AI Practice\Keys\.env")
 audioFilePath = Path("AI Practice\AudioFiles\output.ogg")
@@ -40,7 +41,7 @@ async def askChatGPTVoice(ctx, *, arg):
     # Generate TTS audio
     # tts = gTTS(text=arg, lang="en")
     with open(audioFilePath, "wb") as file:
-        response = textToVoice(askGPT(arg), file)
+        response = TTS(arg, file)
         await ctx.send(response)
 
     os.remove(file)

@@ -27,14 +27,33 @@ response = client.audio.speech.create(
 response.write("output.ogg")
 
 def TTS(arg, audioFile):
+    text = askGPT(arg)
     response = client.audio.speech.create(
         model = "tts-1",
-        input = arg,
+        input = text,
         voice = "echo",
         response_format = "opus",
         speed = 1.0
     )
 
     response.write(audioFile)
-
     return response
+
+def askGPT(question):
+    response = client.chat.completions.create(
+        model =  "gpt-4o",
+        messages = [
+            {
+                "role": "system",
+                "content": "This response is going to be converted to speech."
+            },
+            {
+                "role": "user",
+                "content": f"{question}"
+            }
+        ],
+        temperature = 1,
+        max_tokens = 4096,
+        top_p = 1,
+    ) 
+    return response.choices[0].message.content
