@@ -12,6 +12,7 @@ sys.path.insert(0, "AI Practice\Code")
 from AskAQuestion import askGPT
 from TextToSpeech import textToVoice
 from another import TTS
+from Send import sendVoiceMessage
 
 env_path = Path("AI Practice\Keys\.env")
 audioFilePath = Path("AI Practice\AudioFiles\output.ogg")
@@ -43,11 +44,10 @@ async def askChatGPT(ctx, *, arg):
 async def askChatGPTVoice(ctx, *, arg):
     # Generate TTS audio
     # tts = gTTS(text=arg, lang="en")
-    with open(audioFilePath, "wb") as file:
-        response = TTS(arg, file)
-        await ctx.send(response)
+    await sendVoiceMessage(ctx, audioFilePath, channelId)
 
-    os.remove(file)
+    with open(audioFilePath, "wb") as file:
+        pass
 
 # Use to send a message to a specific channel
 # @client.event
