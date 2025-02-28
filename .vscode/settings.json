@@ -1,5 +1,7 @@
 {
     "python.analysis.extraPaths": [
-        "./AI Practice/Code"
+        "./AI Practice/Code",
+        "./AI Practice/Code",
+        "./Python Stuff/AI Practice/Code"
     ]
 }

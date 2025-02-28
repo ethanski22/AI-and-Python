@@ -8,7 +8,7 @@ from gtts import gTTS
 from dotenv import load_dotenv
 from discord.ext import commands
 from pathlib import Path
-sys.path.insert(0, "AI Practice\Code")
+sys.path.insert(0, "Python Stuff/AI Practice/Code")
 from AskAQuestion import askGPT
 from TextToSpeech import textToVoice
 from another import TTS
