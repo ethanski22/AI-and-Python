@@ -17,17 +17,8 @@ client = OpenAI(
 
 filePath = Path("AI Practice\AudioFiles\output.ogg")
 
-response = client.audio.speech.create(
-    model = "tts-1",
-    voice = "echo",
-    response_format = "ogg",
-    input = "Hello world! This is a streaming test."
-)
-
-response.write("output.ogg")
-
 def TTS(arg, audioFile):
-    text = askGPT(arg)
+    text = askGPTToBeSentToSpeech(arg)
     response = client.audio.speech.create(
         model = "tts-1",
         input = text,
@@ -39,7 +30,7 @@ def TTS(arg, audioFile):
     response.write(audioFile)
     return response
 
-def askGPT(question):
+def askGPTToBeSentToSpeech(question):
     response = client.chat.completions.create(
         model =  "gpt-4o",
         messages = [
