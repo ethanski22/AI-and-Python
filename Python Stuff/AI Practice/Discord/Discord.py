@@ -4,6 +4,7 @@ import discord
 import requests
 import json
 import base64
+import math
 from gtts import gTTS
 from dotenv import load_dotenv
 from discord.ext import commands
@@ -13,6 +14,7 @@ from AskAQuestion import askGPT
 from TextToSpeech import textToVoice
 from another import TTS
 from Send import sendVoiceMessage
+from GetTime import getOggDuration
 
 env_path = Path("AI Practice\Keys\.env")
 audioFilePath = Path("AI Practice\AudioFiles\output.ogg")
@@ -40,14 +42,14 @@ async def askChatGPT(ctx, *, arg):
     response = askGPT(arg)
     await ctx.send(response)
 
-@client.event
+@client.command()
 async def askChatGPTVoice(ctx, *, arg):
-    # Generate TTS audio
-    # tts = gTTS(text=arg, lang="en")
-    await sendVoiceMessage(ctx, audioFilePath, channelId)
+    await TTS(arg, audioFilePath, channelId)
 
-    with open(audioFilePath, "wb") as file:
-        pass
+@client.command()
+async def askChatGPTVoice2(ctx, *, arg):
+    sendVoiceMessage(audioFilePath, arg)
+    await ctx.send(file=discord.File(audioFilePath))
 
 # Use to send a message to a specific channel
 # @client.event
