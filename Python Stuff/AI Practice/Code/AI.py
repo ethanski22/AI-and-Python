@@ -30,6 +30,7 @@ client = OpenAI(
 
 question = input("Ask me a question: ")
 
+# normal text response
 response = client.chat.completions.create(
     model =  "gpt-4o",
     messages = [
@@ -46,6 +47,32 @@ response = client.chat.completions.create(
     max_tokens = 4096,
     top_p = 1,
 ) 
+
+# voice response
+response = client.audio.speech.create(
+        model = "tts-1",
+        voice = "echo",
+        response_format = "opus",
+        input = f"{question}",
+    )
+
+# Json response
+response = openai.ChatCompletion.create(
+    model="gpt-40",
+    messages=[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user", 
+            "content": "Generate a JSON object representing a user profile with name, age, and email fields."
+        }
+    ]
+)
+
+jsonResponse = response['choices'][0]['message']['content']
+print(jsonResponse)
 
 
 # response = client.Completions.create(
