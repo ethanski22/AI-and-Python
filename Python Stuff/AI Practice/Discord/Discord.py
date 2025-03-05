@@ -49,7 +49,10 @@ async def askChatGPTVoice(ctx, *, arg):
 @client.command()
 async def askChatGPTVoice2(ctx, *, arg):
     sendVoiceMessage(audioFilePath, arg)
-    await ctx.send(file=discord.File(audioFilePath))
+    
+    with open(audioFilePath, "rb") as file:
+        await ctx.send(file=discord.File(file, audioFilePath))
+
 
 # Use to send a message to a specific channel
 # @client.event

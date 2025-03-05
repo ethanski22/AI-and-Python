@@ -18,13 +18,11 @@ async def sendVoiceMessage(audioFilePath: str, text: str):
 
     open(audioFilePath, "w")
 
-    
-
     response = client.audio.speech.create(
         model = "tts-1",
         voice = "echo",
         response_format = "opus",
-        input = askForGPT(text),
+        input = f"{askForGPT(text)}",
     )
 
     # Open file and write the response
@@ -32,9 +30,7 @@ async def sendVoiceMessage(audioFilePath: str, text: str):
     #     for chunk in response.iter_bytes():
     #         file.write(chunk)
 
-    response.write_to_file(audioFilePath)
-    
-    return
+    await response.write_to_file(audioFilePath)
 
 
 def askForGPT(question):
