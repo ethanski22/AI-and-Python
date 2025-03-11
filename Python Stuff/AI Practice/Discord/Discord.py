@@ -1,20 +1,12 @@
 import os
 import sys
 import discord
-import requests
-import json
-import base64
-import math
-from gtts import gTTS
 from dotenv import load_dotenv
 from discord.ext import commands
 from pathlib import Path
 sys.path.insert(0, "Python Stuff/AI Practice/Code")
 from AskAQuestion import askGPT
-from TextToSpeech import textToVoice
-from another import TTS
-from Send import sendVoiceMessage
-from GetTime import getOggDuration
+from TextToSpeech import TTS
 
 env_path = Path("AI Practice\Keys\.env")
 audioFilePath = Path("AI Practice\AudioFiles\output.ogg")
@@ -42,23 +34,13 @@ async def askChatGPT(ctx, *, arg):
     response = askGPT(arg)
     await ctx.send(response)
 
-@client.command()
-async def askChatGPTVoice(ctx, *, arg):
-    await TTS(arg, audioFilePath, channelId)
 
 @client.command()
-async def askChatGPTVoice2(ctx, *, arg):
-    sendVoiceMessage(audioFilePath, arg)
+async def askChatGPTVoice(ctx, *, arg):
+    TTS(audioFilePath, arg)
     
     with open(audioFilePath, "rb") as file:
         await ctx.send(file=discord.File(file, audioFilePath))
-
-
-# Use to send a message to a specific channel
-# @client.event
-# async def on_member_join(member):
-#     channel = client.get_channel(1336498123102486619)
-#     await channel.send(f"{member} has joined the server")
 
 @client.event
 async def on_member_remove(member):
